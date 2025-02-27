@@ -27,5 +27,94 @@ html, body {
         fill-opacity: 0.6;
         stroke: white;
         pointer-events: auto;
+
+        --color-departures: steelblue;
+        --color-arrivals: darkorange;
+        --color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+        );
+        fill: var(--color);
     }
+}
+
+header {
+    display: flex;
+    gap: 1em;
+    align-items: baseline;
+    margin-left: auto;
+    justify-content: space-between;
+}
+
+header label {
+    margin-left: auto;
+}
+
+header time {
+    display: block;
+    text-align: right;
+}
+
+#time-slider {
+    width: 400px;
+}
+
+#any-time {
+    display: block;
+    font-style: italic;
+    color: #999;
+    text-align: right;
+}
+
+:root {
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+}
+
+.legend {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    align-items: center;
+
+    border: 2px solid lightgray;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.legend > div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    position: relative;
+}
+
+.legend > div::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 3px;
+    background-color: transparent;
+}
+
+.legend > div:nth-child(1) {
+    --departure-ratio: 1;
+}
+
+.legend > div:nth-child(2) {
+    --departure-ratio: 0.5;
+}
+
+.legend > div:nth-child(3) {
+    --departure-ratio: 0;
+}
+
+.legend > div::before {
+    background-color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
 }
